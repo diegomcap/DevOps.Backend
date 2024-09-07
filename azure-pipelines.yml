@@ -47,10 +47,6 @@ steps:
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: 'DevOpsTestProject'
     publishLocation: 'Container'
-
-- task: SonarQubePrepare@6
+- task: SonarQubeAnalyze@6
   inputs:
-    SonarQube: 'LocalSonarQube'
-    scannerMode: 'MSBuild'
-    projectKey: 'DevOps_BAckEnd_DevOps_BAckEnd_3065ebdf-2691-442b-ab6a-00d86372b0ab'
-    projectName: 'DevOps BAckEnd'
+    jdkversion: 'JAVA_HOME_17_X64'
