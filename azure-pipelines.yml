@@ -7,7 +7,7 @@ trigger:
 - none
 
 pool:
--vmImage:'windows-latest'
+  vmImage: 'windows-latest'
 
 variables:
   buildPlatform: 'Any CPU'
@@ -17,38 +17,33 @@ variables:
 
 steps: 
 - task: NuGetToolInstaller@1
-  name: 'NugetToolIntaller'
-  displayName: 'Nuget tool Installer'
+  displayName: 'NuGet tool installer'
 
 - task: NuGetCommand@2
-  name: 'NugetRestore'
-  displayName: 'Nuget Restore Packges'
+  displayName: 'NuGet restore packages'
   inputs:
     command: 'restore'
     restoreSolution: '$(solution)'
     feedsToUse: 'select'
 
 - task: DotNetCoreCLI@2
-  name: 'Test'
-  displayName: 'Run Test'
+  displayName: 'Run tests'
   inputs:
     command: 'test'
     projects: '$(solution)'
-    arguments: '--configuration $(BuildConfiguration)'
+    arguments: '--configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
-  name: 'Publish'
   displayName: 'Publish'
   inputs:
-        command: 'publish'
-        publishWebProjects: false
-        arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-        zipAfterPublish: false
+    command: 'publish'
+    publishWebProjects: false
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: false
 
 - task: PublishBuildArtifacts@1
-  name: 'PublishBuildArtifacts'
-  displayName: 'Publish build Artifacts'
+  displayName: 'Publish build artifacts'
   inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'DevOpsTestProject'
-        publishLocation: 'Container'
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'DevOpsTestProject'
+    publishLocation: 'Container'
