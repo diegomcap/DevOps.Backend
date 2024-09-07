@@ -48,8 +48,17 @@ steps:
     artifactName: 'DevOpsTestProject'
     publishLocation: 'Container'
 
-- task: SonarQubePreBuild@1
+- task: SonarQubePrepare@6
   inputs:
-    projectVersion: '1.0'
+    SonarQube: 'LocalSonarQube'
+    scannerMode: 'MSBuild'
+    projectKey: 'DevOps_BAckEnd_DevOps_BAckEnd_3065ebdf-2691-442b-ab6a-00d86372b0ab'
+    projectName: 'DevOps BAckEnd'
 
-- task: SonarQubePostTest@1
+- task: SonarQubeAnalyze@6
+  inputs:
+        jdkversion: 'JAVA_HOME_17_X64'
+
+- task: SonarQubePublish@6
+  inputs:
+    pollingTimeoutSec: '300'
