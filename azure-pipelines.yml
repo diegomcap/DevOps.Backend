@@ -47,6 +47,13 @@ steps:
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: 'DevOpsTestProject'
     publishLocation: 'Container'
+
+- task: SonarQubePrepare@6
+  inputs:
+    SonarQube: 'LocalSonarQube'
+    scannerMode: 'CLI'
+    configMode: 'file'
+    
 - task: SonarQubeAnalyze@6
   inputs:
     jdkversion: 'JAVA_HOME_17_X64'
