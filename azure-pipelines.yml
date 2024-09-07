@@ -47,15 +47,3 @@ steps:
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: 'DevOpsTestProject'
     publishLocation: 'Container'
-
-- task: SonarQubePrepare@6
-  inputs:
-    SonarQube: 'LocalSonarQube'
-    scannerMode: 'MSBuild'
-    msBuildVersion: '9.0.0-rc.99116'
-    projectKey: 'sqa_d7e7d646a5bf7c443b8495b787271c12ba0a515f'
-    projectName: 'DevOps BAckEnd'
-
-- task: SonarQubePublish@6
-  inputs:
-    pollingTimeoutSec: '300'
